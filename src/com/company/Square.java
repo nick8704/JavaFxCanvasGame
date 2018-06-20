@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Square extends AbstractShape {
 
-    public Square(GraphicsContext gc, List<Shape> shapes) {
-        super(gc, shapes);
+    public Square(GraphicsContext gc, List<Shape> shapes, boolean active) {
+        super(gc, shapes, true);
         color = Color.PLUM;
         shapeType = ShapeType.SQUARE;
     }

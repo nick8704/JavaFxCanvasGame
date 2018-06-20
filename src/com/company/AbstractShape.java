@@ -15,6 +15,7 @@ public abstract class AbstractShape implements Shape {
     protected final int LINE_WIDHT = 5;
     protected final int ONE_STEP = 5;
     protected final int ONE_STEP_CHANGE_SIZE = 9;
+    protected boolean active;
 
     protected double x;
     protected double y;
@@ -22,8 +23,9 @@ public abstract class AbstractShape implements Shape {
 
     protected Color color;
 
-    public AbstractShape(GraphicsContext gc, List<Shape> shapes) {
+    public AbstractShape(GraphicsContext gc, List<Shape> shapes, boolean active) {
         this.gc = gc;
+        this.active = active;
     }
 
     @Override
@@ -58,6 +60,14 @@ public abstract class AbstractShape implements Shape {
 
     public void setHEIGHT(int HEIGHT) {
         this.HEIGHT = HEIGHT;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void moveUp() {
@@ -104,7 +114,8 @@ public abstract class AbstractShape implements Shape {
                 + x + ","
                 + y + ","
                 + HEIGHT + ","
-                + WIDTH
+                + WIDTH + ","
+                + active
                 + "\n";
     }
 }

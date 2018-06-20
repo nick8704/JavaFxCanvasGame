@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Circle extends AbstractShape {
 
-    public Circle(GraphicsContext gc, List<Shape> shapes) {
-        super(gc, shapes);
+    public Circle(GraphicsContext gc, List<Shape> shapes, boolean active) {
+        super(gc, shapes, true);
         color = Color.RED;
         shapeType = ShapeType.CIRCLE;
     }

@@ -30,4 +30,8 @@ public interface Shape {
 
     void setY(double y);
 
+    boolean isActive();
+
+    void setActive(boolean active);
+
 }
