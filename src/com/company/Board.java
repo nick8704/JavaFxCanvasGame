@@ -136,7 +136,9 @@ public class Board implements Serializable {
                 shapes.remove(i);
             }
         }
-        shapes.get(shapes.size() - 1).setActive(true);
+        if(shapes.size() >= 1) {
+            shapes.get(shapes.size() - 1).setActive(true);
+        }
     }
 
     public void cloneShape() {
