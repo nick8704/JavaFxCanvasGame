@@ -38,6 +38,14 @@ public abstract class AbstractShape implements Shape {
         gc.setLineWidth(LINE_WIDHT);
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
     public void setX(double x) {
         this.x = x;
     }

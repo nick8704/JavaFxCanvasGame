@@ -86,12 +86,16 @@ public class Board implements Serializable {
 
     public void changeActiveShapeIndexUp() {
         if (shapes.get(shapes.size() - 1).isActive()) {
-            shapes.get(shapes.size() - 1).setActive(false);
+            for (Shape shape : shapes) {
+                    shape.setActive(false);
+                }
             shapes.get(0).setActive(true);
         } else {
             for (int i = 0; i < shapes.size(); i++) {
-                if(shapes.get(i).isActive()) {
-                    shapes.get(i).setActive(false);
+                if (shapes.get(i).isActive()) {
+                    for (Shape shape : shapes) {
+                        shape.setActive(false);
+                    }
                     shapes.get(i + 1).setActive(true);
                     break;
                 }
@@ -101,12 +105,16 @@ public class Board implements Serializable {
 
     public void changeActiveShapeIndexDown() {
         if (shapes.get(0).isActive()) {
-            shapes.get(0).setActive(false);
+            for (Shape shape : shapes) {
+                shape.setActive(false);
+            }
             shapes.get(shapes.size() - 1).setActive(true);
         } else {
             for (int i = 0; i < shapes.size(); i++) {
-                if(shapes.get(i).isActive()) {
-                    shapes.get(i).setActive(false);
+                if (shapes.get(i).isActive()) {
+                    for (Shape shape : shapes) {
+                        shape.setActive(false);
+                    }
                     shapes.get(i - 1).setActive(true);
                     break;
                 }
@@ -116,7 +124,7 @@ public class Board implements Serializable {
 
     public void increaseSizeOnBoard() {
         for (Shape shape : shapes) {
-            if(shape.isActive()) {
+            if (shape.isActive()) {
                 shape.increaseSize();
             }
         }
@@ -124,41 +132,47 @@ public class Board implements Serializable {
 
     public void decreaseSizeOnBoard() {
         for (Shape shape : shapes) {
-            if(shape.isActive()) {
+            if (shape.isActive()) {
                 shape.decreaseSize();
             }
         }
     }
 
     public void remove() {
-        for (int i = 0; i < shapes.size(); i++) {
-            if(shapes.get(i).isActive()) {
+        for (int i = shapes.size() - 1; i >= 0; i--) {
+            if (shapes.get(i).isActive()) {
                 shapes.remove(i);
             }
         }
-        if(shapes.size() >= 1) {
+        if (shapes.size() >= 1) {
             shapes.get(shapes.size() - 1).setActive(true);
         }
     }
 
     public void cloneShape() {
-        for (int i = 0; i < shapes.size(); i++) {
-            if (shapes.get(i).isActive()) {
-                if (shapes.get(i) instanceof Square) {
-                    shapes.add(new Square(gc, shapes, true));
-                } else if (shapes.get(i) instanceof Triangle) {
-                    shapes.add(new Triangle(gc, shapes, true));
-                } else if (shapes.get(i) instanceof Circle) {
-                    shapes.add(new Circle(gc, shapes, true));
-                }
-                for (Shape shape : shapes) {
-                    shape.setActive(false);
-                }
-                shapes.get(shapes.size() - 1).setHEIGHT(shapes.get(i).getHEIGHT());
-                shapes.get(shapes.size() - 1).setWIDTH(shapes.get(i).getWIDTH());
-                shapes.get(shapes.size() - 1).setActive(true);
-                break;
+        List<Shape> listForClone = new ArrayList<>();
+        for (Shape shape : shapes) {
+            if (shape.isActive()) {
+                listForClone.add(shape);
             }
+        }
+
+        for (Shape shape : shapes) {
+            shape.setActive(false);
+        }
+
+        for (int i = 0; i < listForClone.size(); i++) {
+            if (listForClone.get(i) instanceof Square) {
+                shapes.add(new Square(gc, shapes, true));
+            } else if (listForClone.get(i) instanceof Triangle) {
+                shapes.add(new Triangle(gc, shapes, true));
+            } else if (listForClone.get(i) instanceof Circle) {
+                shapes.add(new Circle(gc, shapes, true));
+            }
+            shapes.get(shapes.size() - 1).setHEIGHT(listForClone.get(i).getHEIGHT());
+            shapes.get(shapes.size() - 1).setWIDTH(listForClone.get(i).getWIDTH());
+            shapes.get(shapes.size() - 1).setX(listForClone.get(i).getX() + 5);
+            shapes.get(shapes.size() - 1).setY(listForClone.get(i).getY() + 5);
         }
     }
 
@@ -195,5 +209,15 @@ public class Board implements Serializable {
             e.printStackTrace();
         }
         this.shapes = shapes;
+    }
+
+    public void interflow(int sceneX, int sceneY) {
+        for (int i = 0; i < shapes.size(); i++) {
+            if ((sceneX >= shapes.get(i).getX() && sceneX <= shapes.get(i).getX() + shapes.get(i).getWIDTH()) &&
+                    (sceneY >= shapes.get(i).getY() && sceneY <= shapes.get(i).getY() + shapes.get(i).getHEIGHT())) {
+                shapes.get(i).setActive(true);
+                draw();
+            }
+        }
     }
 }

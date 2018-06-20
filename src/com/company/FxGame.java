@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -29,6 +30,7 @@ public class FxGame extends Application {
 
         Scene scene = new Scene(group);
         registerOnKeyPressListener(scene);
+        registerOnMousePressListener(scene);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("JavaFX super crazy game by @anikonets v.1.0");
@@ -100,4 +102,14 @@ public class FxGame extends Application {
         });
     }
 
+    public void registerOnMousePressListener(Scene scene) {
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isControlDown()) {
+                    board.interflow((int) event.getSceneX(), (int) event.getSceneY());
+                }
+            }
+        });
+    }
 }
