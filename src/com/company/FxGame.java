@@ -1,6 +1,5 @@
 package com.company;
 
-import com.google.gson.Gson;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,13 +9,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
 public class FxGame extends Application {
 
-    private static final String FILE_NAME = "save.txt";
     private Board board;
     private GraphicsContext gc;
 
@@ -68,16 +62,13 @@ public class FxGame extends Application {
                         board.moveLeftOnBoard();
                         break;
                     case DIGIT1:
-                        Board.shapes.add(new Circle(gc, Board.shapes));
-                        Board.activeShapeIndex = Board.shapes.size() - 1;
+                        board.addCircle();
                         break;
                     case DIGIT2:
-                        Board.shapes.add(new Triangle(gc, Board.shapes));
-                        Board.activeShapeIndex = Board.shapes.size() - 1;
+                        board.addTriangle();
                         break;
                     case DIGIT3:
-                        Board.shapes.add(new Square(gc, Board.shapes));
-                        Board.activeShapeIndex = Board.shapes.size() - 1;
+                        board.addSquare();
                         break;
                     case PAGE_DOWN:
                         board.changeActiveShapeIndexDown();
@@ -98,10 +89,10 @@ public class FxGame extends Application {
                         board.remove();
                         break;
                     case S:
-                        writeToFile();
+                        board.writeToFile();
                         break;
                     case L:
-                        //loadFromFile();
+                        board.loadFromFile();
                         break;
                 }
                 board.draw();
@@ -109,13 +100,4 @@ public class FxGame extends Application {
         });
     }
 
-    public void writeToFile() {
-        Gson gson = new Gson();
-        String boardToJson = gson.toJson(board);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));) {
-            writer.write(boardToJson);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

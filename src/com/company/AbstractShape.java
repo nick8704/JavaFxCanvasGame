@@ -36,6 +36,14 @@ public abstract class AbstractShape implements Shape {
         gc.setLineWidth(LINE_WIDHT);
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    public void setY(double y) {
+        this.y = y;
+    }
+
     public void setWIDTH(int WIDTH) {
         this.WIDTH = WIDTH;
     }
@@ -88,5 +96,15 @@ public abstract class AbstractShape implements Shape {
             HEIGHT -= ONE_STEP_CHANGE_SIZE;
             WIDTH -= ONE_STEP_CHANGE_SIZE;
         }
+    }
+
+    @Override
+    public String toString() {
+        return shapeType + ","
+                + x + ","
+                + y + ","
+                + HEIGHT + ","
+                + WIDTH
+                + "\n";
     }
 }
