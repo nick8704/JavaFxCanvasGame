@@ -59,6 +59,7 @@ public class Board implements Serializable {
         for (Shape shape : shapes) {
             if (shape.isActive()) {
                 shape.moveRight();
+
             }
         }
     }

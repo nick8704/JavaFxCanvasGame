@@ -2,6 +2,7 @@ package com.company;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
 import java.util.List;
 
 public abstract class AbstractShape implements Shape {
@@ -79,13 +80,13 @@ public abstract class AbstractShape implements Shape {
     }
 
     public void moveUp() {
-        if(y - ONE_STEP >= 0) {
+        if (y - ONE_STEP >= 0) {
             y -= ONE_STEP;
         }
     }
 
     public void moveDown() {
-        if(y + HEIGHT <= Config.HEIGHT) {
+        if (y + HEIGHT <= Config.HEIGHT) {
             y += ONE_STEP;
         }
     }
@@ -97,20 +98,20 @@ public abstract class AbstractShape implements Shape {
     }
 
     public void moveRight() {
-        if(x + WIDTH <= Config.WIDTH) {
+        if (x + WIDTH <= Config.WIDTH) {
             x += ONE_STEP;
         }
     }
 
     public void increaseSize() {
-        if(HEIGHT <= MAX_SIZE) {
+        if (HEIGHT <= MAX_SIZE) {
             HEIGHT += ONE_STEP_CHANGE_SIZE;
             WIDTH += ONE_STEP_CHANGE_SIZE;
         }
     }
 
     public void decreaseSize() {
-        if(HEIGHT >= MIN_SIZE) {
+        if (HEIGHT >= MIN_SIZE) {
             HEIGHT -= ONE_STEP_CHANGE_SIZE;
             WIDTH -= ONE_STEP_CHANGE_SIZE;
         }
