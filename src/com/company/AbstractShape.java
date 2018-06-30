@@ -3,8 +3,6 @@ package com.company;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import java.util.List;
-
 public abstract class AbstractShape implements Shape {
 
     protected final GraphicsContext gc;

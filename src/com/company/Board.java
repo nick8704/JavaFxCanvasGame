@@ -20,44 +20,43 @@ public class Board implements Serializable {
     }
 
     public void draw() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.drawShadedShape();
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).drawShadedShape();
             } else {
-                shape.drawContourShape();
+                shapes.get(i).drawContourShape();
             }
         }
     }
 
     public void moveUpOnBoard() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.moveUp();
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).moveUp();
             }
         }
     }
 
     public void moveDownOnBoard() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.moveDown();
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).moveDown();
             }
         }
     }
 
     public void moveLeftOnBoard() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.moveLeft();
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).moveLeft();
             }
         }
     }
 
     public void moveRightOnBoard() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.moveRight();
-
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).moveRight();
             }
         }
     }
@@ -67,6 +66,7 @@ public class Board implements Serializable {
             shape.setActive(false);
         }
         shapes.add(new Triangle(gc, true));
+        activeIndex = shapes.size() - 1;
     }
 
     public void addCircle() {
@@ -74,6 +74,7 @@ public class Board implements Serializable {
             shape.setActive(false);
         }
         shapes.add(new Circle(gc, true));
+        activeIndex = shapes.size() - 1;
     }
 
     public void addSquare() {
@@ -81,97 +82,68 @@ public class Board implements Serializable {
             shape.setActive(false);
         }
         shapes.add(new Square(gc, true));
+        activeIndex = shapes.size() - 1;
     }
 
     public void changeActiveShapeIndexUp() {
-        if (shapes.get(shapes.size() - 1).isActive()) {
-            for (Shape shape : shapes) {
-                shape.setActive(false);
-            }
-            shapes.get(0).setActive(true);
+        if(activeIndex == shapes.size() - 1) {
+            activeIndex = 0;
         } else {
-            for (int i = 0; i < shapes.size(); i++) {
-                if (shapes.get(i).isActive()) {
-                    for (Shape shape : shapes) {
-                        shape.setActive(false);
-                    }
-                    shapes.get(i + 1).setActive(true);
-                    break;
-                }
-            }
+            activeIndex++;
         }
     }
 
     public void changeActiveShapeIndexDown() {
-        if (shapes.get(0).isActive()) {
-            for (Shape shape : shapes) {
-                shape.setActive(false);
-            }
-            shapes.get(shapes.size() - 1).setActive(true);
+        if(activeIndex == 0) {
+            activeIndex = shapes.size() - 1;
         } else {
-            for (int i = 0; i < shapes.size(); i++) {
-                if (shapes.get(i).isActive()) {
-                    for (Shape shape : shapes) {
-                        shape.setActive(false);
-                    }
-                    shapes.get(i - 1).setActive(true);
-                    break;
-                }
-            }
+            activeIndex--;
         }
     }
 
     public void increaseSizeOnBoard() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.increaseSize();
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).increaseSize();
             }
         }
     }
 
     public void decreaseSizeOnBoard() {
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                shape.decreaseSize();
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                shapes.get(i).decreaseSize();
             }
         }
     }
 
     public void remove() {
         for (int i = shapes.size() - 1; i >= 0; i--) {
-            if (shapes.get(i).isActive()) {
+            if (i == activeIndex) {
                 shapes.remove(i);
+                changeActiveShapeIndexDown();
+                break;
             }
-        }
-        if (shapes.size() >= 1) {
-            shapes.get(shapes.size() - 1).setActive(true);
         }
     }
 
     public void cloneShape() {
-        List<Shape> listForClone = new ArrayList<>();
-        for (Shape shape : shapes) {
-            if (shape.isActive()) {
-                listForClone.add(shape);
+        for (int i = 0; i < shapes.size(); i++) {
+            if (i == activeIndex) {
+                if (shapes.get(i) instanceof Square) {
+                    shapes.add(new Square(gc, true));
+                } else if (shapes.get(i) instanceof Triangle) {
+                    shapes.add(new Triangle(gc,  true));
+                } else if (shapes.get(i) instanceof Circle) {
+                    shapes.add(new Circle(gc,  true));
+                }
+                shapes.get(shapes.size() - 1).setHeight(shapes.get(i).getHeight());
+                shapes.get(shapes.size() - 1).setWidth(shapes.get(i).getWidth());
+                shapes.get(shapes.size() - 1).setX(shapes.get(i).getX() + 5);
+                shapes.get(shapes.size() - 1).setY(shapes.get(i).getY() + 5);
+                activeIndex = shapes.size() - 1;
+                break;
             }
-        }
-
-        for (Shape shape : shapes) {
-            shape.setActive(false);
-        }
-
-        for (int i = 0; i < listForClone.size(); i++) {
-            if (listForClone.get(i) instanceof Square) {
-                shapes.add(new Square(gc, true));
-            } else if (listForClone.get(i) instanceof Triangle) {
-                shapes.add(new Triangle(gc,  true));
-            } else if (listForClone.get(i) instanceof Circle) {
-                shapes.add(new Circle(gc,  true));
-            }
-            shapes.get(shapes.size() - 1).setHeight(listForClone.get(i).getHeight());
-            shapes.get(shapes.size() - 1).setWidth(listForClone.get(i).getWidth());
-            shapes.get(shapes.size() - 1).setX(listForClone.get(i).getX() + 5);
-            shapes.get(shapes.size() - 1).setY(listForClone.get(i).getY() + 5);
         }
     }
 
