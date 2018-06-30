@@ -2,12 +2,11 @@ package com.company;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import java.util.List;
 
 public class Triangle extends AbstractShape {
 
-    public Triangle(GraphicsContext gc, List<Shape> shapes, boolean active) {
-        super(gc, shapes, true);
+    public Triangle(GraphicsContext gc, boolean active) {
+        super(gc,true);
         color = Color.MEDIUMBLUE;
         shapeType = ShapeType.TRIANGLE;
     }
@@ -15,14 +14,14 @@ public class Triangle extends AbstractShape {
     @Override
     public void drawShadedShape() {
         super.drawShadedShape();
-        gc.fillPolygon(new double[]{x, x + WIDTH / 2,x + WIDTH}, new double[]{y + HEIGHT, y, y + HEIGHT}, 3);
+        gc.fillPolygon(new double[]{x, x + width / 2,x + width}, new double[]{y + height, y, y + height}, 3);
     }
 
     @Override
     public void drawContourShape() {
         super.drawContourShape();
         gc.setStroke(Color.MEDIUMBLUE);
-        gc.strokePolygon(new double[]{x, x + WIDTH / 2, x + WIDTH}, new double[]{y + HEIGHT, y, y + HEIGHT}, 3);
+        gc.strokePolygon(new double[]{x, x + width / 2, x + width}, new double[]{y + height, y, y + height}, 3);
     }
 
 }

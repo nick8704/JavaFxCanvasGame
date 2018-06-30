@@ -1,5 +1,8 @@
 package com.company;
 
+import com.company.save.Save;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -10,11 +13,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.*;
+
 public class FxGame extends Application {
 
     private Board board;
     private GraphicsContext gc;
-
+    private final String FILE_NAME = "save.txt";
 
     public static void main(String[] args) {
         launch(args);
@@ -91,10 +96,10 @@ public class FxGame extends Application {
                         board.remove();
                         break;
                     case S:
-                        board.writeToFile();
+                        writeToFile();
                         break;
                     case L:
-                        board.loadFromFile();
+                        loadFromFile();
                         break;
                 }
                 board.draw();
@@ -111,5 +116,32 @@ public class FxGame extends Application {
                 }
             }
         });
+    }
+
+    public void writeToFile() {
+        Gson gson = new GsonBuilder().create();
+        String jsonString = gson.toJson(board.makeSave());
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));) {
+            writer.write(jsonString);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void loadFromFile() {
+        try(BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));) {
+            StringBuilder result = new StringBuilder();
+            String line = reader.readLine();
+            while (line != null) {
+                result.append(line);
+                line = reader.readLine();
+            }
+            Gson gson = new Gson();
+            Save load = gson.fromJson(result.toString(), Save.class);
+            board.loadSave(load);
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -18,13 +18,13 @@ public interface Shape {
 
     void decreaseSize();
 
-    void setWIDTH(int WIDTH);
+    void setWidth(int width);
 
-    void setHEIGHT(int HEIGHT);
+    void setHeight(int height);
 
-    int getWIDTH();
+    int getWidth();
 
-    int getHEIGHT();
+    int getHeight();
 
     void setX(double x);
 

@@ -9,8 +9,8 @@ public abstract class AbstractShape implements Shape {
 
     protected final GraphicsContext gc;
 
-    protected int WIDTH = 40;
-    protected int HEIGHT = 40;
+    protected int width = 40;
+    protected int height = 40;
     private final int MAX_SIZE = 200;
     private final int MIN_SIZE = 20;
     protected final int LINE_WIDHT = 5;
@@ -24,7 +24,7 @@ public abstract class AbstractShape implements Shape {
 
     protected Color color;
 
-    public AbstractShape(GraphicsContext gc, List<Shape> shapes, boolean active) {
+    public AbstractShape(GraphicsContext gc, boolean active) {
         this.gc = gc;
         this.active = active;
     }
@@ -55,20 +55,20 @@ public abstract class AbstractShape implements Shape {
         this.y = y;
     }
 
-    public void setWIDTH(int WIDTH) {
-        this.WIDTH = WIDTH;
+    public void setWidth(int width) {
+        this.width = width;
     }
 
-    public int getWIDTH() {
-        return WIDTH;
+    public int getWidth() {
+        return width;
     }
 
-    public int getHEIGHT() {
-        return HEIGHT;
+    public int getHeight() {
+        return height;
     }
 
-    public void setHEIGHT(int HEIGHT) {
-        this.HEIGHT = HEIGHT;
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public boolean isActive() {
@@ -86,7 +86,7 @@ public abstract class AbstractShape implements Shape {
     }
 
     public void moveDown() {
-        if (y + HEIGHT <= Config.HEIGHT) {
+        if (y + height <= Config.HEIGHT) {
             y += ONE_STEP;
         }
     }
@@ -98,22 +98,22 @@ public abstract class AbstractShape implements Shape {
     }
 
     public void moveRight() {
-        if (x + WIDTH <= Config.WIDTH) {
+        if (x + width <= Config.WIDTH) {
             x += ONE_STEP;
         }
     }
 
     public void increaseSize() {
-        if (HEIGHT <= MAX_SIZE) {
-            HEIGHT += ONE_STEP_CHANGE_SIZE;
-            WIDTH += ONE_STEP_CHANGE_SIZE;
+        if (height <= MAX_SIZE) {
+            height += ONE_STEP_CHANGE_SIZE;
+            width += ONE_STEP_CHANGE_SIZE;
         }
     }
 
     public void decreaseSize() {
-        if (HEIGHT >= MIN_SIZE) {
-            HEIGHT -= ONE_STEP_CHANGE_SIZE;
-            WIDTH -= ONE_STEP_CHANGE_SIZE;
+        if (height >= MIN_SIZE) {
+            height -= ONE_STEP_CHANGE_SIZE;
+            width -= ONE_STEP_CHANGE_SIZE;
         }
     }
 
@@ -122,8 +122,8 @@ public abstract class AbstractShape implements Shape {
         return shapeType + ","
                 + x + ","
                 + y + ","
-                + HEIGHT + ","
-                + WIDTH + ","
+                + height + ","
+                + width + ","
                 + active
                 + "\n";
     }

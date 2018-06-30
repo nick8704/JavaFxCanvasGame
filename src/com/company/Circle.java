@@ -2,12 +2,11 @@ package com.company;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import java.util.List;
 
 public class Circle extends AbstractShape {
 
-    public Circle(GraphicsContext gc, List<Shape> shapes, boolean active) {
-        super(gc, shapes, true);
+    public Circle(GraphicsContext gc, boolean active) {
+        super(gc, true);
         color = Color.RED;
         shapeType = ShapeType.CIRCLE;
     }
@@ -15,14 +14,14 @@ public class Circle extends AbstractShape {
     @Override
     public void drawShadedShape() {
         super.drawShadedShape();
-        gc.fillOval(x, y, WIDTH, HEIGHT);
+        gc.fillOval(x, y, width, height);
     }
 
     @Override
     public void drawContourShape() {
         super.drawContourShape();
         gc.setStroke(Color.RED);
-        gc.strokeOval(x, y, WIDTH, HEIGHT);
+        gc.strokeOval(x, y, width, height);
     }
 
 }

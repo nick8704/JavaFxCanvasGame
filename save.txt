@@ -1,10 +1,1 @@
-CIRCLE,260.0,85.0,40,40,false
-TRIANGLE,100.0,0.0,40,40,false
-SQUARE,0.0,160.0,40,40,false
-CIRCLE,180.0,0.0,40,40,false
-CIRCLE,75.0,60.0,40,40,false
-CIRCLE,0.0,0.0,40,40,false
-TRIANGLE,465.0,15.0,40,40,true
-SQUARE,365.0,175.0,40,40,false
-CIRCLE,440.0,75.0,40,40,true
-CIRCLE,365.0,15.0,40,40,true
+{"list":[{"shapeType":"SQUARE","width":193,"height":193,"x":395.0,"y":0.0},{"shapeType":"CIRCLE","width":40,"height":40,"x":295.0,"y":430.0},{"shapeType":"TRIANGLE","width":40,"height":40,"x":0.0,"y":180.0},{"shapeType":"SQUARE","width":40,"height":40,"x":195.0,"y":320.0},{"shapeType":"CIRCLE","width":40,"height":40,"x":355.0,"y":435.0},{"shapeType":"SQUARE","width":40,"height":40,"x":255.0,"y":160.0}],"activeIndex":0}
