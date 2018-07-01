@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Triangle extends AbstractShape {
 
-    public Triangle(GraphicsContext gc, boolean active) {
-        super(gc,true);
+    public Triangle(GraphicsContext gc) {
+        super(gc);
         color = Color.MEDIUMBLUE;
         shapeType = ShapeType.TRIANGLE;
     }

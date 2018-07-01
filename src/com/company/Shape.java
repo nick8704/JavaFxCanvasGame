@@ -34,10 +34,6 @@ public interface Shape {
 
     double getY();
 
-    boolean isActive();
-
-    void setActive(boolean active);
-
     boolean consistPoint(int sceneX, int sceneY);
 
 }

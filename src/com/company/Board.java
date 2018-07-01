@@ -16,7 +16,7 @@ public class Board implements Serializable {
 
     public Board(GraphicsContext gc) {
         this.gc = gc;
-        shapes.add(new Circle(gc, true));
+        shapes.add(new Circle(gc));
     }
 
     public void draw() {
@@ -62,26 +62,17 @@ public class Board implements Serializable {
     }
 
     public void addTriangle() {
-        for (Shape shape : shapes) {
-            shape.setActive(false);
-        }
-        shapes.add(new Triangle(gc, true));
+        shapes.add(new Triangle(gc));
         activeIndex = shapes.size() - 1;
     }
 
     public void addCircle() {
-        for (Shape shape : shapes) {
-            shape.setActive(false);
-        }
-        shapes.add(new Circle(gc, true));
+        shapes.add(new Circle(gc));
         activeIndex = shapes.size() - 1;
     }
 
     public void addSquare() {
-        for (Shape shape : shapes) {
-            shape.setActive(false);
-        }
-        shapes.add(new Square(gc, true));
+        shapes.add(new Square(gc));
         activeIndex = shapes.size() - 1;
     }
 
@@ -131,11 +122,11 @@ public class Board implements Serializable {
         for (int i = 0; i < shapes.size(); i++) {
             if (i == activeIndex) {
                 if (shapes.get(i) instanceof Square) {
-                    shapes.add(new Square(gc, true));
+                    shapes.add(new Square(gc));
                 } else if (shapes.get(i) instanceof Triangle) {
-                    shapes.add(new Triangle(gc,  true));
+                    shapes.add(new Triangle(gc));
                 } else if (shapes.get(i) instanceof Circle) {
-                    shapes.add(new Circle(gc,  true));
+                    shapes.add(new Circle(gc));
                 }
                 shapes.get(shapes.size() - 1).setHeight(shapes.get(i).getHeight());
                 shapes.get(shapes.size() - 1).setWidth(shapes.get(i).getWidth());

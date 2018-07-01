@@ -1,7 +1,13 @@
 package com.company.save;
 
-import com.company.*;
-
+import com.company.AbstractShape;
+import com.company.Board;
+import com.company.Circle;
+import com.company.Group;
+import com.company.Shape;
+import com.company.ShapeType;
+import com.company.Square;
+import com.company.Triangle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,12 +87,12 @@ public class SaveConfiguration {
             group.setList(groupList);
             return group;
         } else {
-            Shape shape = new Circle(board.gc, false);
+            Shape shape = new Circle(board.gc);
             if (configuration.getSaveType() == ShapeType.TRIANGLE) {
-                shape = new Triangle(board.gc, false);
+                shape = new Triangle(board.gc);
             }
             if (configuration.getSaveType() == ShapeType.SQUARE) {
-                shape = new Square(board.gc, false);
+                shape = new Square(board.gc);
             }
             shape.setX(configuration.getX());
             shape.setY(configuration.getY());

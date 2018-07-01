@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Square extends AbstractShape {
 
-    public Square(GraphicsContext gc, boolean active) {
-        super(gc, true);
+    public Square(GraphicsContext gc) {
+        super(gc);
         color = Color.PLUM;
         shapeType = ShapeType.SQUARE;
     }

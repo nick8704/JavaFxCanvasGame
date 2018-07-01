@@ -105,18 +105,6 @@ public class Group implements Shape {
     }
 
     @Override
-    public boolean isActive() {
-        return groupList.get(0).isActive();
-    }
-
-    @Override
-    public void setActive(boolean active) {
-        for (Shape shape: groupList) {
-            shape.setActive(active);
-        }
-    }
-
-    @Override
     public void setX(double x) {
     }
 

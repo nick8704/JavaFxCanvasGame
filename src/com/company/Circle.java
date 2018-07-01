@@ -5,8 +5,8 @@ import javafx.scene.paint.Color;
 
 public class Circle extends AbstractShape {
 
-    public Circle(GraphicsContext gc, boolean active) {
-        super(gc, true);
+    public Circle(GraphicsContext gc) {
+        super(gc);
         color = Color.RED;
         shapeType = ShapeType.CIRCLE;
     }
