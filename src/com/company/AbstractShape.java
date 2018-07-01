@@ -68,27 +68,19 @@ public abstract class AbstractShape implements Shape {
     }
 
     public void moveUp() {
-        if (y - ONE_STEP >= 0) {
-            y -= ONE_STEP;
-        }
+        y -= ONE_STEP;
     }
 
     public void moveDown() {
-        if (y + height <= Config.HEIGHT) {
-            y += ONE_STEP;
-        }
+        y += ONE_STEP;
     }
 
     public void moveLeft() {
-        if(x >= 0) {
-            x -= ONE_STEP;
-        }
+        x -= ONE_STEP;
     }
 
     public void moveRight() {
-        if (x + width <= Config.WIDTH) {
-            x += ONE_STEP;
-        }
+        x += ONE_STEP;
     }
 
     public void increaseSize() {
