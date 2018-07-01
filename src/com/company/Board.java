@@ -121,17 +121,12 @@ public class Board implements Serializable {
     public void cloneShape() {
         for (int i = 0; i < shapes.size(); i++) {
             if (i == activeIndex) {
-                if (shapes.get(i) instanceof Square) {
-                    shapes.add(new Square(gc));
-                } else if (shapes.get(i) instanceof Triangle) {
-                    shapes.add(new Triangle(gc));
-                } else if (shapes.get(i) instanceof Circle) {
-                    shapes.add(new Circle(gc));
+                if (shapes.get(i) instanceof Group) {
+                    shapes.add(shapes.get(i).cloneGroup((Group) shapes.get(i)));
                 }
-                shapes.get(shapes.size() - 1).setHeight(shapes.get(i).getHeight());
-                shapes.get(shapes.size() - 1).setWidth(shapes.get(i).getWidth());
-                shapes.get(shapes.size() - 1).setX(shapes.get(i).getX() + 5);
-                shapes.get(shapes.size() - 1).setY(shapes.get(i).getY() + 5);
+                if (shapes.get(i) instanceof AbstractShape) {
+                    shapes.add((shapes.get(i)).cloneShape(shapes.get(i).getX() + 5, shapes.get(i).getY() + 5, shapes.get(i).getWidth(), shapes.get(i).getHeight()));
+                }
                 activeIndex = shapes.size() - 1;
                 break;
             }

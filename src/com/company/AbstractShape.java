@@ -106,6 +106,11 @@ public abstract class AbstractShape implements Shape {
     }
 
     @Override
+    public Shape cloneGroup(Group shape) {
+        return null;
+    }
+
+    @Override
     public boolean consistPoint(int sceneX, int sceneY) {
         return between(sceneX, (int) x, (int) x + width) && between(sceneY, (int) y, (int) y + height);
     }

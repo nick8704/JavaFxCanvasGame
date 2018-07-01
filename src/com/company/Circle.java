@@ -24,4 +24,14 @@ public class Circle extends AbstractShape {
         gc.strokeOval(x, y, width, height);
     }
 
+    @Override
+    public Shape cloneShape(double x, double y, int width, int height) {
+        Shape shape = new Circle(gc);
+        shape.setX(x);
+        shape.setY(y);
+        shape.setWidth(width);
+        shape.setHeight(height);
+        return shape;
+    }
+
 }

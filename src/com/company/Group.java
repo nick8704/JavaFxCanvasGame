@@ -132,6 +132,11 @@ public class Group implements Shape {
         return false;
     }
 
+    @Override
+    public Shape cloneShape(double x, double y, int width, int height) {
+        return null;
+    }
+
     private void addShape(Shape shape) {
         if (shape instanceof Group) {
             Group group = (Group) shape;
@@ -139,6 +144,17 @@ public class Group implements Shape {
         } else {
             groupList.add(shape);
         }
+    }
+
+    @Override
+    public Shape cloneGroup(Group shape) {
+        List<Shape> resultList = new ArrayList<>();
+        for (Shape shapes : shape.getList()) {
+            resultList.add(shapes.cloneShape(shapes.getX() + 5, shapes.getY() + 5, shapes.getWidth(), shapes.getHeight()));
+        }
+        Group result = new Group();
+        result.setList(resultList);
+        return result;
     }
 
     public void setList(List<Shape> groupList) {

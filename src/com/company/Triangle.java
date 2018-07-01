@@ -24,4 +24,14 @@ public class Triangle extends AbstractShape {
         gc.strokePolygon(new double[]{x, x + width / 2, x + width}, new double[]{y + height, y, y + height}, 3);
     }
 
+    @Override
+    public Shape cloneShape(double x, double y, int width, int height) {
+        Shape shape = new Triangle(gc);
+        shape.setX(x);
+        shape.setY(y);
+        shape.setWidth(width);
+        shape.setHeight(height);
+        return shape;
+    }
+
 }

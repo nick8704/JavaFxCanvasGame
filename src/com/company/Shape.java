@@ -36,4 +36,7 @@ public interface Shape {
 
     boolean consistPoint(int sceneX, int sceneY);
 
+    Shape cloneShape(double x, double y, int width, int height);
+
+    Shape cloneGroup(Group shape);
 }
