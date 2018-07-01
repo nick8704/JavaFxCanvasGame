@@ -149,8 +149,7 @@ public class Board implements Serializable {
 
     public void interflow(int sceneX, int sceneY) {
         for (int i = 0; i < shapes.size(); i++) {
-            if ((sceneX >= shapes.get(i).getX() && sceneX <= shapes.get(i).getX() + shapes.get(i).getWidth()) &&
-                    (sceneY >= shapes.get(i).getY() && sceneY <= shapes.get(i).getY() + shapes.get(i).getHeight())) {
+            if (shapes.get(i).consistPoint(sceneX, sceneY)) {
                 Shape result = new Group(shapes.get(i), shapes.get(activeIndex));
                 Shape forRemove1 = shapes.get(i);
                 Shape forRemove2 = shapes.get(activeIndex);

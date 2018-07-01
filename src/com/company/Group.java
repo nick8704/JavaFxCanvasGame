@@ -134,6 +134,16 @@ public class Group implements Shape {
         return 0;
     }
 
+    @Override
+    public boolean consistPoint(int sceneX, int sceneY) {
+        for (Shape shape : groupList) {
+            if (shape.consistPoint(sceneX, sceneY)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void addShape(Shape shape) {
         if (shape instanceof Group) {
             Group group = (Group) shape;
