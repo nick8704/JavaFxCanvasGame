@@ -1,12 +1,8 @@
 package com.company.save;
 
-import com.company.AbstractShape;
-import com.company.Board;
-import com.company.Circle;
-import com.company.Shape;
-import com.company.ShapeType;
-import com.company.Square;
-import com.company.Triangle;
+import com.company.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaveConfiguration {
@@ -64,22 +60,40 @@ public class SaveConfiguration {
         if (shape instanceof Circle) {
             result.shapeType = ShapeType.CIRCLE;
         }
+        if (shape instanceof Group) {
+            Group group = (Group) shape;
+            result.list = new ArrayList<SaveConfiguration>();
+            for (Shape tmpShape : group.getList()) {
+                result.list.add(createSaveConfiguration(tmpShape));
+            }
+            result.shapeType = ShapeType.GROUP;
+        }
         return result;
     }
 
     public static Shape createShape(SaveConfiguration configuration, Board board) {
-        Shape shape = new Circle(board.gc, false);
-        if(configuration.getSaveType() == ShapeType.TRIANGLE) {
-            shape = new Triangle(board.gc, false);
+        if (configuration.getSaveType() == ShapeType.GROUP) {
+            Group group = new Group();
+            List<Shape> groupList = new ArrayList<Shape>();
+            for (SaveConfiguration tmpShapeSave : configuration.getList()) {
+                groupList.add(createShape(tmpShapeSave, board));
+            }
+            group.setList(groupList);
+            return group;
+        } else {
+            Shape shape = new Circle(board.gc, false);
+            if (configuration.getSaveType() == ShapeType.TRIANGLE) {
+                shape = new Triangle(board.gc, false);
+            }
+            if (configuration.getSaveType() == ShapeType.SQUARE) {
+                shape = new Square(board.gc, false);
+            }
+            shape.setX(configuration.getX());
+            shape.setY(configuration.getY());
+            shape.setHeight(configuration.getHeight());
+            shape.setWidth(configuration.getWidth());
+            return shape;
         }
-        if(configuration.getSaveType() == ShapeType.SQUARE) {
-            shape = new Square(board.gc, false);
-        }
-        shape.setX(configuration.getX());
-        shape.setY(configuration.getY());
-        shape.setHeight(configuration.getHeight());
-        shape.setWidth(configuration.getWidth());
-        return shape;
     }
 
 }

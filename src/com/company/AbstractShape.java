@@ -115,14 +115,4 @@ public abstract class AbstractShape implements Shape {
         }
     }
 
-    @Override
-    public String toString() {
-        return shapeType + ","
-                + x + ","
-                + y + ","
-                + height + ","
-                + width + ","
-                + active
-                + "\n";
-    }
 }

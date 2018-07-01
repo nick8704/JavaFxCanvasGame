@@ -151,7 +151,13 @@ public class Board implements Serializable {
         for (int i = 0; i < shapes.size(); i++) {
             if ((sceneX >= shapes.get(i).getX() && sceneX <= shapes.get(i).getX() + shapes.get(i).getWidth()) &&
                     (sceneY >= shapes.get(i).getY() && sceneY <= shapes.get(i).getY() + shapes.get(i).getHeight())) {
-                shapes.get(i).setActive(true);
+                Shape result = new Group(shapes.get(i), shapes.get(activeIndex));
+                Shape forRemove1 = shapes.get(i);
+                Shape forRemove2 = shapes.get(activeIndex);
+                shapes.remove(forRemove1);
+                shapes.remove(forRemove2);
+                shapes.add(result);
+                activeIndex = shapes.size() - 1;
                 draw();
             }
         }
